@@ -1,0 +1,1 @@
+web: ./node_modules/forever/bin/forever slack_bot.js slack_bot.js
