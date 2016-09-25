@@ -1,0 +1,240 @@
+@import '../../stylesheets/variables.less';
+@import '../../stylesheets/helpers.less';
+@import '../../stylesheets/lib/elements.less';
+
+#listLoadMore {
+  width: 100%;
+  text-align: center;
+  #loadMore {
+    margin: 0 auto;
+
+    i {
+      color: #fff;
+    }
+  }
+}
+
+
+#list {
+  max-width: 1200px;
+  min-width: 320px;
+  margin: 5em auto 20px;
+
+  .list-header {
+    display: flex;
+    background-color: @emphasis;
+    padding: 20px;
+    color:@lightText;
+    box-shadow: @box-shadow;
+
+    h4, h5 {
+      margin: 0;
+      padding: 5px 10px;
+      text-transform: uppercase;
+    }
+
+    h5 {
+      font-weight: normal;
+    }
+    .list-header-menu {
+      display: flex;
+
+
+
+      #list-header-menu-toggle {
+        cursor: pointer;
+        color: #fff;
+      }
+    }
+    .list-title {
+      flex: 2 0 0;
+      display: flex;
+      i {
+        display: inline-block;
+        height: 24px;
+        width: 24px;
+        border: 2px solid @lightText;
+        border-radius: 20px;
+        padding: 3px;
+        text-align: center;
+        color: #fff;
+      }
+      a {
+        color: #fff;
+        margin-top: 3px;
+
+        i:hover {
+          color: @darkGray;
+          border-color: @darkGray;
+        }
+      }
+
+      a:focus, a i:focus {
+        outline: none;
+      }
+    }
+
+
+
+    .list-modify {
+      display: flex;
+      text-align: right;
+      margin-right: 25px;
+      min-width: 200px;
+
+      h5 {
+        padding: 5px 7%;
+      }
+    }
+  }
+
+  #list-header-toggle {
+    border: 0px;
+    font-size: 28px;
+    margin-top: -5px;
+  }
+  .list-header-dropdown {
+    border-radius: 0;
+    background-color: @emphasis;
+    border: 0;
+    margin: 20px 0 20px -20px;
+    position: absolute;
+
+    a {
+      .item {
+        padding: 15px 40px !important;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 14px;
+      }
+    }
+
+  }
+
+  #list-header-menu-ul {
+    display:none;
+    position: absolute;
+    background-color: @emphasis;
+
+    list-style: none;
+    padding: 0;
+    margin-top: -5px;
+
+    li {
+      text-transform: uppercase;
+      padding: 1em 3em;
+      font-weight: bold;
+      font-size: 14px;
+
+      a {
+        color: #fff;
+      }
+    }
+
+    li:hover {
+      background-color: lighten(@emphasis, 10%);
+    }
+  }
+
+  .list-body {
+
+    margin: 0 5px;
+    border-top: 6px solid @orangeShadow;
+    background-color: @lightOrange;
+    box-shadow: @box-shadow;
+
+    ul {
+
+      padding: 0;
+
+      li {
+
+        list-style: none;
+
+        .list-item {
+          display: flex;
+          border-bottom: 1px solid @orangeShadow;
+          margin: 0 3%;
+          padding: 8px 0;
+
+          .list-item-image {
+            height: 40px;
+            width: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-right: 20px;
+            margin-top: 5px;
+
+            .image {
+              max-height: 100%;
+              min-height: 100%;
+            }
+
+          }
+
+          .list-item-title {
+            flex: 2 0 0;
+            display: flex;
+
+            h4 {
+              line-height: 48px;
+            }
+          }
+          .list-item-modify {
+            text-align: right;
+            flex: 1 0 0;
+            opacity: .2;
+            min-width: 250px;
+
+            span {
+              margin: 0 4%;
+              display: inline-block;
+            }
+
+            span:hover {
+              color: darken(@darkGray, 100%);
+            }
+
+            .disabled {
+              color: @lightGray;
+            }
+
+            .icon-sc_delete:hover {
+              color: red;
+            }
+
+            a:focus {
+              outline: none;
+            }
+          }
+        }
+      }
+
+      li:last-child .list-item {
+        border-bottom: 0px;
+      }
+
+      li:hover {
+        background-color: @selectedOrange;
+      }
+
+      li:hover .list-item-modify {
+        opacity: 1;
+      }
+
+      li:hover .disabled {
+        opacity: .2;
+      }
+    }
+  }
+}
+
+
+#list-menu {
+  display:none;
+}
+
+.show {display:block !important;}
+
+#subcol:hover {background-color:#f1f1f1 }

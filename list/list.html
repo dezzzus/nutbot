@@ -1,0 +1,215 @@
+<template name="list">
+  <section id="list">
+      {{> listHeader}}
+      <div class="list-body">
+        <ul>
+          {{#if data_item}}
+          {{#each data_item}}
+          <li>
+            <div class="list-item">
+              <div class="list-item-title">
+                {{#if image}}
+                <div class="list-item-image">
+                  <img class="image" src="{{image}}" />
+                </div>
+                {{/if}}
+                {{#if single}}
+                <a href="{{subcol_name}}__{{_id}}">
+                  <h4>{{item_name}}{{#if chapter}} - {{chapter}}{{/if}}{{#if additional}} - {{additional}} {{/if}}</h4></a><!--{{pathFor route='pathName' _id=this._id }}-->
+                {{else}}
+                  <a href="{{col_name}}_{{subcol_name}}_{{_id}}">
+                    <h4>{{item_name}}{{#if chapter}} - {{chapter}}{{/if}}{{#if additional}} - {{additional}} {{/if}}</h4></a><!--{{pathFor route='pathName' _id=this._id }}-->
+                {{/if}}
+
+              </div>
+              <div class="list-item-modify">
+                {{#if single}}
+                <a href="{{subcol_name}}__{{_id}}"><span class="icon sc icon-sc_detail"></span></a>
+                {{else}}
+                <a href="{{col_name}}_{{subcol_name}}_{{_id}}"><span class="icon sc icon-sc_detail"></span></a>
+                {{/if}}
+                {{#if is_admin}}
+                <a id="edit-item" href="#"><span class="icon sc icon-sc_edit_2"></span></a>
+                <a id="delete-item" href="#" class="{{is_disabled}}"><span class="icon sc icon-sc_delete"></span></a>
+                {{/if}}
+              </div>
+            </div>
+          </li>
+          {{/each}}
+          {{else}}
+          <li>
+            <div class="list-item">
+              <h4>Sorry, No {{list_title}} found.</h4>
+            </div>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+  </section>
+  {{#if hasMore}}
+  <section id="listLoadMore">
+    <button id="loadMore" class="ui right labeled icon orange button">
+      <i class="right arrow icon"></i>
+      Load More...
+    </button>
+  </section>
+  {{/if}}
+
+  {{#if edit_mode}}
+    {{#with item}}
+      {{> add}}
+    {{/with}}
+  {{else}}
+      {{> add}}
+  {{/if}}
+  {{> delete}}
+</template>
+
+<template name="listHeader">
+  <script language="JavaScript">
+    function menuToggle() {
+      document.getElementById("list-menu").classList.toggle("show");
+      //alert("hi");
+    }
+
+    window.onclick = function (event) {
+      if (!event.target.matches('#list-header-toggle')) {
+        var dropdown = document.getElementById("list-menu");
+        //alert(dropdown);
+        if (dropdown.classList.contains('show')) {
+          dropdown.classList.remove('show');
+        }
+        /*
+        var i;
+        for (i=0; i<dropdowns.length; i++)
+        {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropDown.classList.remove('show');
+          }
+        }
+        */
+      }
+    }
+  </script>
+  <div class="list-header">
+    <div class="list-title">
+      {{#if single}}
+        {{#if sub_items}}
+        <div class="list-header-menu">
+          <!--<span class="icon sc icon-sc_menu" id="list-header-menu-toggle"></span>-->
+          <div class="subcollection-list">
+            
+            <i class="dropdown icon" id="list-header-toggle" onclick="menuToggle()"></i>
+            <div class="menu list-header-dropdown" id="list-menu">
+              {{#each sub_items}}
+              <a id="subcol" href="{{link}}">
+              <div class="item">
+                {{name}}
+              </div>
+              </a>
+              {{/each}}
+            </div>
+          </div>
+          <h4>{{list_title}}</h4>
+          {{#if is_admin}}<a id="add-item" href="#"><i class="fa fa-plus"></i></a>{{/if}}
+
+        </div>
+        {{else}}
+          {{#if list_title}}
+            <h4>{{list_title}}</h4>
+            {{#if is_admin}}<a id="add-item" href="#"><i class="fa fa-plus"></i></a>{{/if}}
+            {{else}}
+            <h4>Items</h4>
+          {{/if}}
+        {{/if}}
+      {{else}}
+        {{#if list_title}}
+          <h4>{{list_title}}</h4>
+          {{#if is_admin}}<a id="add-item" href="#"><i class="fa fa-plus"></i></a>{{/if}}
+          {{else}}
+          <h4>Items</h4>
+        {{/if}}
+      {{/if}}
+
+    </div>
+
+    <div class="list-modify">
+      <h5>Details</h5>
+      {{#if is_admin}}
+      <h5>Edit</h5>
+      <h5>Delete</h5>
+      {{/if}}
+    </div>
+  </div>
+</template>
+
+
+<template name="crList">
+  <section id="list">
+      {{> crListHeader}}
+      <div class="list-body">
+        <ul>
+          {{#if data_item}}
+          {{#each data_item}}
+          <li>
+            <div class="list-item">
+              <div class="list-item-title">
+                <a href="{{col_name}}_{{subcol_name}}_{{_id}}"><h4>{{item_name}}</h4></a><!--{{pathFor route='pathName' _id=this._id }}-->
+              </div>
+              <div class="list-item-modify">
+                <a href="{{col_name}}_{{subcol_name}}_{{_id}}"><span class="icon sc icon-sc_detail"></span></a>
+                {{#if is_admin}}
+                <a id="assign-item" href="#"><span class="icon sc icon-sc_assign"></span></a>
+                <a id="delete-item" href="#"><span class="icon sc icon-sc_delete"></span></a>
+                {{/if}}
+              </div>
+            </div>
+          </li>
+          {{/each}}
+          {{else}}
+          <li>
+            <div class="list-item">
+              <h4>Sorry, No {{list_title}} found.</h4>
+            </div>
+          </li>
+          {{/if}}
+        </ul>
+      </div>
+  </section>
+  {{#if edit_mode}}
+    {{#with item}}
+      {{> add}}
+    {{/with}}
+  {{else}}
+      {{> add}}
+  {{/if}}
+  {{> delete}}
+  {{> assign}}
+</template>
+
+<template name="crListHeader">
+  <div class="list-header">
+    <div class="list-title">
+        <div class="list-header-menu">
+          {{#if is_admin}}<div class="ui dropdown subcollection-list">
+            <i class="dropdown icon" id="list-header-toggle"></i>
+            <div class="menu list-header-dropdown">
+              {{#each sub_items}}
+                <div class="item"><a id="subcol" href="{{link}}">{{name}}</a></div>
+              {{/each}}
+            </div>
+          </div>
+          {{/if}}
+          <h4>{{list_title}}</h4>
+        </div>
+    </div>
+    <div class="list-modify">
+      <h5>Details</h5>
+      {{#if is_admin}}
+      <h5>Assign</h5>
+      <h5>Delete</h5>
+      {{/if}}
+    </div>
+  </div>
+</template>
